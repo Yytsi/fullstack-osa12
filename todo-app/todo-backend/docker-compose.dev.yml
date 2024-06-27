@@ -15,4 +15,3 @@ services:
     image: redis
     ports:
       - 3457:6379
-# host:port =  localhost:3456
