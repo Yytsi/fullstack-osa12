@@ -7,4 +7,9 @@ export default defineConfig({
     include: ["tests/vitest/**/*.{test,spec}.{js,ts,jsx,tsx}"],
     setupFiles: ["./setupTests.js"],
   },
+  server: {
+    watch: {
+      ignored: ["vite.config.js", ".env"],
+    },
+  },
 });

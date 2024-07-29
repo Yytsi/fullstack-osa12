@@ -1,31 +1,22 @@
-# Zero stage
-FROM node:20
-
-WORKDIR /usr/src/app
-
-COPY . .
-
-RUN npm ci
-
-ENV VITE_BACKEND_URL=http://localhost:3000
-
-RUN npm run build
-
 # Test stage
 FROM node:20
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY --from=0 /usr/src/app .
+COPY . .
+
+RUN npm install
 
 # Run tests
 RUN npm run test
 
 # Final stage
-FROM nginx:1.25-alpine
+FROM node:20
 
-COPY --from=1 /usr/src/app/dist /usr/share/nginx/html
+WORKDIR /app
 
-EXPOSE 80
+COPY --from=0 /app .
 
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 5173
+
+CMD ["npm", "run", "dev", "--", "--host"]

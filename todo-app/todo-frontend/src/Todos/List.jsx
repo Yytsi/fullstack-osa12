@@ -15,13 +15,16 @@ const TodoList = ({ todos, deleteTodo, completeTodo }) => {
       {todos
         .map((todo) => (
           <Todo
-            key={todo.id}
+            key={Math.random() * 1000000}
             todo={todo}
             onClickDelete={onClickDelete}
             onClickComplete={onClickComplete}
           />
         ))
-        .reduce((acc, cur) => [...acc, <hr />, cur], [])}
+        .reduce(
+          (acc, cur) => [...acc, <hr key={Math.random() * 1000000} />, cur],
+          []
+        )}
     </>
   );
 };
