@@ -1,8 +1,10 @@
 services:
   todo-frontend:
-    image: todo-frontend:dev
-    # ports:
-    #   - 5173:5173
+    build:
+      context: todo-frontend
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./todo-frontend/:/usr/src/app
     depends_on:
       - server
 
@@ -13,8 +15,6 @@ services:
     environment:
       - REDIS_URL=redis://redis:6379
       - MONGO_URL=mongodb://the_username:the_password@mongo:27017/the_database
-    ports:
-      - 3000:3000
     volumes:
       - ./todo-backend/:/usr/src/app
     depends_on:

@@ -1,7 +1,7 @@
 # Test stage
 FROM node:20
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
 COPY . .
 
@@ -13,9 +13,9 @@ RUN npm run test
 # Final stage
 FROM node:20
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
-COPY --from=0 /app .
+COPY --from=0 /usr/src/app .
 
 EXPOSE 5173
 
