@@ -17,6 +17,8 @@ WORKDIR /usr/src/app
 
 COPY --from=0 /usr/src/app .
 
+EXPOSE 5173
+
 RUN npm run build
 
 CMD ["npx", "serve", "-s", "dist", "-l", "5173"]
